@@ -1,9 +1,9 @@
 version: "3.9" 
 services:
-  parify-db: 
+  pairify-db: 
     image: postgres 
     restart: always 
-    container_name: parify-db 
+    container_name: pairify-db 
     ports:
       - 5432:5432
     environment:
