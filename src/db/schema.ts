@@ -73,3 +73,11 @@ export const verificationTokens = pgTable(
     compoundKey: primaryKey({ columns: [vt.identifier, vt.token] }),
   })
 )
+
+export const room = pgTable("session", {
+  userId: text("userId")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),     // room table wants a reference from another table called users: users.id, on userDelete delete this room to
+  name: text("langugage").notNull(),
+  githubRepo: text("githubRepo")
+})
