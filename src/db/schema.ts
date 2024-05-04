@@ -1,25 +1,26 @@
-import postgres from "postgres"
-import { drizzle } from "drizzle-orm/postgres-js"
-import type { AdapterAccount } from "next-auth/adapters"
+import postgres from "postgres";
+import { drizzle } from "drizzle-orm/postgres-js";
+import type { AdapterAccount } from "next-auth/adapters";
 import {
   timestamp,
   pgTable,
   text,
   primaryKey,
   integer,
-} from "drizzle-orm/pg-core"
+  uuid,
+} from "drizzle-orm/pg-core";
+import { sql } from "drizzle-orm";
+
+const connectionString = "postgres://postgres:postgres@localhost:5432/drizzle";
+const pool = postgres(connectionString, { max: 1 });
+// export const db = drizzle(pool);
 
 // creating a table named tesitng with id and name as schema values
-export const testing = pgTable('testing', {
-  id: text('id').notNull().primaryKey(),
-  name: text('name'),
-})
- 
-const connectionString = "postgres://postgres:postgres@localhost:5432/drizzle"
-const pool = postgres(connectionString, { max: 1 })
- 
-export const db = drizzle(pool)
- 
+export const testing = pgTable("testing", {
+  id: text("id").notNull().primaryKey(),
+  name: text("name"),
+});
+
 export const users = pgTable("user", {
   id: text("id")
     .primaryKey()
@@ -28,8 +29,8 @@ export const users = pgTable("user", {
   email: text("email").notNull(),
   emailVerified: timestamp("emailVerified", { mode: "date" }),
   image: text("image"),
-})
- 
+});
+
 export const accounts = pgTable(
   "account",
   {
@@ -51,17 +52,17 @@ export const accounts = pgTable(
     compoundKey: primaryKey({
       columns: [account.provider, account.providerAccountId],
     }),
-  })
-)
- 
+  }),
+);
+
 export const sessions = pgTable("session", {
   sessionToken: text("sessionToken").primaryKey(),
   userId: text("userId")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
   expires: timestamp("expires", { mode: "date" }).notNull(),
-})
- 
+});
+
 export const verificationTokens = pgTable(
   "verificationToken",
   {
@@ -71,13 +72,21 @@ export const verificationTokens = pgTable(
   },
   (vt) => ({
     compoundKey: primaryKey({ columns: [vt.identifier, vt.token] }),
-  })
-)
+  }),
+);
 
-export const room = pgTable("session", {
+export const room = pgTable("room", {
+  id: uuid("id")
+    .default(sql`gen_random_uuid()`)
+    .notNull()
+    .primaryKey(),
   userId: text("userId")
     .notNull()
-    .references(() => users.id, { onDelete: "cascade" }),     // room table wants a reference from another table called users: users.id, on userDelete delete this room to
-  name: text("langugage").notNull(),
-  githubRepo: text("githubRepo")
-})
+    .references(() => users.id, { onDelete: "cascade" }), // room table wants a reference from another table called users: users.id, on userDelete delete this room to
+  name: text("name").notNull(),
+  description: text("description"),
+  language: text("language").notNull(),
+  githubRepo: text("githubRepo"),
+});
+
+export type Room = typeof room.$inferSelect; // for our frontend code in /create-room/action.ts

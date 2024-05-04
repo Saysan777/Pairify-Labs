@@ -1,10 +1,11 @@
-'use client'
+"use client";
+
 // see shadcn and just copy paste it
 
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
-import { Button } from "@/components/ui/button"
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -13,108 +14,115 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { createRoomAction } from "./action";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
-    name: z.string().min(1).max(50),
-    description: z.string().min(1).max(50),
-    githubRepo: z.string().min(1).max(50),
-    language: z.string().min(1).max(50),
-})
+  name: z.string().min(1).max(50),
+  description: z.string().min(1).max(50),
+  githubRepo: z.string().min(1).max(50),
+  language: z.string().min(1).max(50),
+});
 
 const CreateRoomForm = () => {
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
-        defaultValues: {
-          name: "",
-          description: "",
-        },
-      })
+  const router = useRouter();
 
-      function onSubmit(values: z.infer<typeof formSchema>) {
-        // Do something with the form values.
-        // ✅ This will be type-safe and validated.
-        console.log(values)
-      }
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      description: "",
+      githubRepo: "",
+      language: "",
+    },
+  });
+
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    await createRoomAction(values);
+
+    router.push("/");
+  }
 
   return (
     <div>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <FormField
+          <FormField
             control={form.control}
             name="name"
             render={({ field }) => (
-                <FormItem>
+              <FormItem>
                 <FormLabel>Name</FormLabel>
                 <FormControl>
-                    <Input {...field} />
+                  <Input {...field} />
                 </FormControl>
                 <FormDescription>
-                    This is your public display name.
+                  This is your public display name.
                 </FormDescription>
                 <FormMessage />
-                </FormItem>
+              </FormItem>
             )}
-            />
+          />
 
-            <FormField
+          <FormField
             control={form.control}
             name="description"
             render={({ field }) => (
-                <FormItem>
+              <FormItem>
                 <FormLabel>Description</FormLabel>
                 <FormControl>
-                    <Input {...field} />
+                  <Input {...field} />
                 </FormControl>
                 <FormDescription>
-                    Please describe what you&apos;ll be coding on.
+                  Please describe what you&apos;ll be coding on.
                 </FormDescription>
                 <FormMessage />
-                </FormItem>
+              </FormItem>
             )}
-            />
+          />
 
-            <FormField
+          <FormField
             control={form.control}
             name="githubRepo"
             render={({ field }) => (
-                <FormItem>
+              <FormItem>
                 <FormLabel>Github Repo</FormLabel>
                 <FormControl>
-                    <Input {...field} />
+                  <Input {...field} />
                 </FormControl>
                 <FormDescription>
-                    Please put a link to your github repository.
+                  Please put a link to your github repository.
                 </FormDescription>
                 <FormMessage />
-                </FormItem>
+              </FormItem>
             )}
-            />
+          />
 
-            <FormField
+          <FormField
             control={form.control}
             name="language"
             render={({ field }) => (
-                <FormItem>
+              <FormItem>
                 <FormLabel>Primary Programming Language</FormLabel>
                 <FormControl>
-                    <Input {...field} />
+                  <Input {...field} />
                 </FormControl>
                 <FormDescription>
-                    List the primary programming language you&apos;ll be working with.
+                  List the primary programming language you&apos;ll be working
+                  with.
                 </FormDescription>
                 <FormMessage />
-                </FormItem>
+              </FormItem>
             )}
-            />
+          />
 
-            <Button type="submit">Submit</Button>
+          <Button type="submit">Submit</Button>
         </form>
-     </Form>
+      </Form>
     </div>
-  )
-}
+  );
+};
 
 export default CreateRoomForm;
