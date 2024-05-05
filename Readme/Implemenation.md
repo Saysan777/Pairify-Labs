@@ -29,3 +29,12 @@
 # TEMPLATE for other projects:
 
 - Go to github and find the `next auth final setup` commit from this project and copy those to get started with authentication and drizzle setup with postgres template to work in anther project.
+
+# Server Actions:
+
+- Server actions is a feature in nextjs that we can use to do operations related to server like db access, mutation etc on client side.
+
+- We use 'use server' directive, this can be used inline for funcitons and also for the whole page(function page not components page)
+
+- Rather than making api's in folders like app/api/<name>, we can simply write the server operations code in client using the 'use server' directive.
+  Check: Great reads
