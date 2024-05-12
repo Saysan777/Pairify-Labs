@@ -85,7 +85,7 @@ export const room = pgTable("room", {
     .references(() => users.id, { onDelete: "cascade" }), // room table wants a reference from another table called users: users.id, on userDelete delete this room to
   name: text("name").notNull(),
   description: text("description"),
-  language: text("language").notNull(),
+  tags: text("tags").notNull(),
   githubRepo: text("githubRepo"),
 });
 

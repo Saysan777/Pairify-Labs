@@ -11,6 +11,7 @@ import {
 import { Room } from "@/db/schema";
 import { GithubIcon } from "lucide-react";
 import { getRooms } from "@/data-access/rooms";
+import { TagsList, splitTags } from "@/components/tags-list";
 
 // Always create necessary components in same file. Create new if re-used by multiple or is very lengthy.
 function RoomCard({ room }: { room: Room }) {
@@ -20,7 +21,9 @@ function RoomCard({ room }: { room: Room }) {
         <CardTitle>{room.name}</CardTitle>
         <CardDescription>{room.description}</CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex flex-col gap-5">
+        <TagsList tags={splitTags(room.tags)} />
+
         {room.githubRepo && (
           <Link
             href={room.githubRepo}
@@ -34,7 +37,7 @@ function RoomCard({ room }: { room: Room }) {
       </CardContent>
       <CardFooter>
         <Button asChild>
-          <Link href={`/room/${room.id}`}>Join Room</Link>
+          <Link href={`/rooms/${room.id}`}>Join Room</Link>
         </Button>
       </CardFooter>
     </Card>
@@ -47,7 +50,7 @@ export default async function Home() {
   return (
     <main className="min-h-screen p-16">
       <div className="flex justify-between w-full mb-8">
-        <h1 className="text-4xl">Find Dev Rooms</h1>
+        <h1 className="text-4xl">Join Dev Rooms</h1>
         <Button>
           <Link href="/create-room">Create room </Link>
         </Button>

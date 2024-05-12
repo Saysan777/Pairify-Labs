@@ -21,9 +21,9 @@ import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   name: z.string().min(1).max(50),
-  description: z.string().min(1).max(50),
+  description: z.string().min(1).max(100),
   githubRepo: z.string().min(1).max(50),
-  language: z.string().min(1).max(50),
+  tags: z.string().min(1).max(50),
 });
 
 const CreateRoomForm = () => {
@@ -35,7 +35,7 @@ const CreateRoomForm = () => {
       name: "",
       description: "",
       githubRepo: "",
-      language: "",
+      tags: "",
     },
   });
 
@@ -56,7 +56,7 @@ const CreateRoomForm = () => {
               <FormItem>
                 <FormLabel>Name</FormLabel>
                 <FormControl>
-                  <Input {...field} />
+                  <Input {...field} placeholder="Pairify Is Awesome" />
                 </FormControl>
                 <FormDescription>
                   This is your public display name.
@@ -73,7 +73,10 @@ const CreateRoomForm = () => {
               <FormItem>
                 <FormLabel>Description</FormLabel>
                 <FormControl>
-                  <Input {...field} />
+                  <Input
+                    {...field}
+                    placeholder="Working in side project. Join the room."
+                  />
                 </FormControl>
                 <FormDescription>
                   Please describe what you&apos;ll be coding on.
@@ -90,7 +93,10 @@ const CreateRoomForm = () => {
               <FormItem>
                 <FormLabel>Github Repo</FormLabel>
                 <FormControl>
-                  <Input {...field} />
+                  <Input
+                    {...field}
+                    placeholder="https://github.com/username/project"
+                  />
                 </FormControl>
                 <FormDescription>
                   Please put a link to your github repository.
@@ -102,12 +108,15 @@ const CreateRoomForm = () => {
 
           <FormField
             control={form.control}
-            name="language"
+            name="tags"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Primary Programming Language</FormLabel>
                 <FormControl>
-                  <Input {...field} />
+                  <Input
+                    {...field}
+                    placeholder="typescript, nextjs, tailwind"
+                  />
                 </FormControl>
                 <FormDescription>
                   List the primary programming language you&apos;ll be working
