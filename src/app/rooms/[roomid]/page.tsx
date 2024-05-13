@@ -2,6 +2,7 @@ import { getRoom } from "@/data-access/rooms";
 import { GithubIcon } from "lucide-react";
 import Link from "next/link";
 import { TagsList, splitTags } from "@/components/tags-list";
+import { PairifyVideoPlayer } from "./video-player";
 
 export default async function RoomPage(props: { params: { roomid: string } }) {
   const roomId = props.params.roomid;
@@ -15,7 +16,7 @@ export default async function RoomPage(props: { params: { roomid: string } }) {
     <div className="grid grid-cols-4 min-h-screen">
       <div className="col-span-3 p-4 pr-2">
         <div className="drop-shadow-lg bg-gray-100 p-4 rounded-lg bg-card text-card-foreground shadow-sm">
-          Video player
+          <PairifyVideoPlayer room={room} />
         </div>
       </div>
 
