@@ -11,8 +11,9 @@ import {
 import { Room } from "@/db/schema";
 import { GithubIcon } from "lucide-react";
 import { getRooms } from "@/data-access/rooms";
-import { TagsList, splitTags } from "@/components/tags-list";
+import { TagsList } from "@/components/tags-list";
 import { SearchBar } from "./search-bar";
+import { splitTags } from "@/lib/utils";
 
 // Always create necessary components in same file. Create new if re-used by multiple or is very lengthy.
 function RoomCard({ room }: { room: Room }) {

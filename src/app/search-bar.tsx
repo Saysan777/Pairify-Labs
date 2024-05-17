@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SearchIcon } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -29,6 +30,10 @@ export function SearchBar() {
       search: query.get("search") || "",
     },
   });
+
+  useEffect(() => {
+    search.setValue("search", query.get("search") || "");
+  }, [search, query]);
 
   async function onSubmit(values: z.infer<typeof searchschema>) {
     if (values.search) {
