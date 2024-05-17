@@ -14,6 +14,7 @@ import { LogIn, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
+import { Separator } from "@/components/ui/separator";
 
 function AccountDropDown() {
   const session = useSession();
@@ -47,6 +48,7 @@ function AccountDropDown() {
 
 const Header = () => {
   const session = useSession();
+  const isLoggedIn = session?.data;
 
   return (
     <header className=" border-b py-4 container dark:bg-gray-900 mx-auto">
@@ -68,8 +70,26 @@ const Header = () => {
         </div>
 
         <div className="flex items-center gap-4">
-          {session.data && <AccountDropDown />}
-          {!session.data && (
+          <nav className="flex gap-4">
+            {isLoggedIn && (
+              <Link href={"/browse"} className="hover:underline font-bold">
+                Browse
+              </Link>
+            )}
+
+            <Separator orientation="vertical" />
+
+            {isLoggedIn && (
+              <Link
+                href={"/personal-rooms"}
+                className="hover:underline font-bold"
+              >
+                My rooms
+              </Link>
+            )}
+          </nav>
+          {isLoggedIn && <AccountDropDown />}
+          {!isLoggedIn && (
             <Button
               variant="link"
               className="gap-2"

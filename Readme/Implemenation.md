@@ -38,3 +38,7 @@
 
 - Rather than making api's in folders like app/api/<name>, we can simply write the server operations code in client using the 'use server' directive.
   Check: Great reads
+
+# Data access and actions files and folder
+
+- Data access as it name suggests relates to db CRUD operaions. It simply performs the operations and returns.
