@@ -12,13 +12,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { LogIn, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
 
 function AccountDropDown() {
   const session = useSession();
-
-  const isLoggedIn = !!session.data;
 
   return (
     <DropdownMenu>
@@ -26,7 +24,6 @@ function AccountDropDown() {
         <Button variant="link" className="gap-2 ">
           <Avatar>
             <AvatarImage src={session.data?.user?.image ?? ""} />
-            <AvatarFallback>CN</AvatarFallback>
           </Avatar>
 
           {session.data?.user.name}
@@ -34,21 +31,23 @@ function AccountDropDown() {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent>
-        {isLoggedIn ? (
-          <DropdownMenuItem onClick={() => signOut()}>
-            <LogOut className="mr-2" /> Sign Out
-          </DropdownMenuItem>
-        ) : (
-          <DropdownMenuItem onClick={() => signIn("google")}>
-            <LogIn className="mr-2" /> Sign In
-          </DropdownMenuItem>
-        )}
+        <DropdownMenuItem
+          onClick={() =>
+            signOut({
+              callbackUrl: "/",
+            })
+          }
+        >
+          <LogOut className="mr-2" /> Sign Out
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
 }
 
 const Header = () => {
+  const session = useSession();
+
   return (
     <header className=" border-b py-4 container dark:bg-gray-900 mx-auto">
       <div className="flex justify-between items-center">
@@ -69,7 +68,16 @@ const Header = () => {
         </div>
 
         <div className="flex items-center gap-4">
-          <AccountDropDown />
+          {session.data && <AccountDropDown />}
+          {!session.data && (
+            <Button
+              variant="link"
+              className="gap-2"
+              onClick={() => signIn("google")}
+            >
+              <LogIn /> Sign In
+            </Button>
+          )}
           <ModeToggle />
         </div>
       </div>

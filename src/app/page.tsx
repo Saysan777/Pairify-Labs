@@ -12,6 +12,7 @@ import { Room } from "@/db/schema";
 import { GithubIcon } from "lucide-react";
 import { getRooms } from "@/data-access/rooms";
 import { TagsList, splitTags } from "@/components/tags-list";
+import { SearchBar } from "./search-bar";
 
 // Always create necessary components in same file. Create new if re-used by multiple or is very lengthy.
 function RoomCard({ room }: { room: Room }) {
@@ -44,8 +45,10 @@ function RoomCard({ room }: { room: Room }) {
   );
 }
 
-export default async function Home() {
-  const rooms = await getRooms();
+export default async function Home({ searchParams }: { searchParams: string }) {
+  const query = searchParams.search;
+
+  const rooms = await getRooms(query);
 
   return (
     <main className="min-h-screen p-16">
@@ -55,6 +58,9 @@ export default async function Home() {
           <Link href="/create-room">Create room </Link>
         </Button>
       </div>
+
+      <SearchBar />
+
       <div className="grid grid-cols-3 gap-6">
         {rooms.map((room) => {
           return <RoomCard key={room.id} room={room} />;

@@ -8,12 +8,13 @@ import {
   StreamTheme,
   StreamVideo,
   StreamVideoClient,
-  User,
+  CallParticipantsList,
 } from "@stream-io/video-react-sdk";
 import "@stream-io/video-react-sdk/dist/css/styles.css";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { generateTokenAction } from "./actions";
+import { useRouter } from "next/navigation";
 
 const apiKey = process.env.NEXT_PUBLIC_STREAM_API_KEY!;
 // const token ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYmZhYmUzZDUtMGRiYi00NWY3LThjMDUtMDMyNWM0Zjc3ZGY4In0.rGhTtO1dRcxakBx_FZKmFcWOxi6cCdGcQEJGvpYCX0c";
@@ -22,6 +23,7 @@ export function PairifyVideoPlayer({ room }: { room: Room }) {
   const session = useSession();
   const [client, setClient] = useState<StreamVideoClient | null>(null);
   const [call, setCall] = useState<Call | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     if (!session.data || !room) return;
@@ -30,7 +32,11 @@ export function PairifyVideoPlayer({ room }: { room: Room }) {
 
     const client = new StreamVideoClient({
       apiKey,
-      user: { id: userId },
+      user: {
+        id: userId,
+        name: session.data.user.name ?? "unknown",
+        image: session.data.user.image ?? undefined,
+      },
       tokenProvider: () => generateTokenAction(),
     });
 
@@ -41,8 +47,10 @@ export function PairifyVideoPlayer({ room }: { room: Room }) {
     setCall(call);
 
     return () => {
-      call.leave();
-      client.disconnectUser();
+      call
+        .leave()
+        .then(() => client.disconnectUser())
+        .catch(console.error);
     };
   }, [session, room]);
 
@@ -53,7 +61,8 @@ export function PairifyVideoPlayer({ room }: { room: Room }) {
         <StreamTheme>
           <StreamCall call={call}>
             <SpeakerLayout />
-            <CallControls />
+            <CallControls onLeave={() => router.push("/")} />
+            <CallParticipantsList onClose={() => undefined} />
           </StreamCall>
         </StreamTheme>
       </StreamVideo>
