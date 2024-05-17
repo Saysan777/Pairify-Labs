@@ -12,15 +12,12 @@ import {
 import { sql } from "drizzle-orm";
 
 const connectionString = "postgres://postgres:postgres@localhost:5432/drizzle";
-const pool = postgres(connectionString, { max: 1 });
+
+//* Need cleanup?
+// const pool = postgres(connectionString, { max: 1 });
 // export const db = drizzle(pool);
 
-// creating a table named tesitng with id and name as schema values
-export const testing = pgTable("testing", {
-  id: text("id").notNull().primaryKey(),
-  name: text("name"),
-});
-
+// creating a table named users with its fields
 export const users = pgTable("user", {
   id: text("id")
     .primaryKey()
@@ -52,7 +49,7 @@ export const accounts = pgTable(
     compoundKey: primaryKey({
       columns: [account.provider, account.providerAccountId],
     }),
-  }),
+  })
 );
 
 export const sessions = pgTable("session", {
@@ -72,7 +69,7 @@ export const verificationTokens = pgTable(
   },
   (vt) => ({
     compoundKey: primaryKey({ columns: [vt.identifier, vt.token] }),
-  }),
+  })
 );
 
 export const room = pgTable("room", {

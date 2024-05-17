@@ -18,6 +18,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { editRoomAction } from "./actions";
 import { Room } from "@/db/schema";
+import { useToast } from "@/components/ui/use-toast";
 
 const formSchema = z.object({
   name: z.string().min(1).max(50),
@@ -27,6 +28,7 @@ const formSchema = z.object({
 });
 
 export const EditRoomForm = ({ room }: { room: Room }) => {
+  const { toast } = useToast();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -41,6 +43,10 @@ export const EditRoomForm = ({ room }: { room: Room }) => {
     const roomData = { ...values, id: room.id as string };
 
     await editRoomAction(roomData);
+    toast({
+      title: "Room Updated",
+      description: "Your room was updated successfully",
+    });
   }
 
   return (

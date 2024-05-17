@@ -42,3 +42,7 @@
 # Data access and actions files and folder
 
 - Data access as it name suggests relates to db CRUD operaions. It simply performs the operations and returns.
+
+# OnDelete: Cascade
+
+- This is simply to delete everything related to a specific user if the user gets deleted

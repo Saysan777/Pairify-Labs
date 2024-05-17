@@ -2,7 +2,7 @@
 
 import { ModeToggle } from "@/components/mode-toggle";
 import { signIn, signOut, useSession } from "next-auth/react";
-import React from "react";
+import React, { useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,39 +10,84 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { LogIn, LogOut } from "lucide-react";
+import { LogIn, LogOut, Trash2Icon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { deleteAccountAction } from "./personal-rooms/actions";
 
 function AccountDropDown() {
   const session = useSession();
+  const [open, setOpen] = useState(false);
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="link" className="gap-2 ">
-          <Avatar>
-            <AvatarImage src={session.data?.user?.image ?? ""} />
-          </Avatar>
+    <>
+      <AlertDialog open={open} onOpenChange={() => setOpen(false)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This action cannot be undone. This will permanently delete your
+              account and remove your data from our servers.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={async () => {
+                await deleteAccountAction();
+                signOut({ callbackUrl: "/" });
+              }}
+            >
+              Yes, delete my account
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
 
-          {session.data?.user.name}
-        </Button>
-      </DropdownMenuTrigger>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="link" className="gap-2 ">
+            <Avatar>
+              <AvatarImage src={session.data?.user?.image ?? ""} />
+            </Avatar>
 
-      <DropdownMenuContent>
-        <DropdownMenuItem
-          onClick={() =>
-            signOut({
-              callbackUrl: "/",
-            })
-          }
-        >
-          <LogOut className="mr-2" /> Sign Out
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+            {session.data?.user.name}
+          </Button>
+        </DropdownMenuTrigger>
+
+        <DropdownMenuContent>
+          <DropdownMenuItem
+            onClick={() =>
+              signOut({
+                callbackUrl: "/",
+              })
+            }
+          >
+            <LogOut className="w-4 h-4 mr-2" /> Sign Out
+          </DropdownMenuItem>
+
+          <DropdownMenuSeparator />
+
+          <DropdownMenuItem onClick={() => setOpen(true)}>
+            <Trash2Icon className="w-4 h-4 mr-2" />
+            Delete account
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </>
   );
 }
 
@@ -51,16 +96,9 @@ const Header = () => {
   const isLoggedIn = session?.data;
 
   return (
-    <header className=" border-b py-4 container dark:bg-gray-900 mx-auto">
-      <div className="flex justify-between items-center">
+    <header className="border-b py-4 dark:bg-gray-900 mx-auto">
+      <div className="container flex justify-between items-center">
         <div className="flex gap-2 items-center font-bold">
-          {/* <Link
-            href="/"
-            className="italic font-serif tracking-wider text-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-500 inline-block text-transparent bg-clip-text cursor-pointer"
-          >
-            Pairify-Labs
-          </Link> */}
-
           <Link
             href="/"
             className="font-mono tracking-wider text-xl bg-gradient-to-r from-cyan-500 to-blue-500 inline-block text-transparent bg-clip-text cursor-pointer"

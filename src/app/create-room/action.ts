@@ -11,7 +11,9 @@ export async function createRoomAction(roomData: Omit<Room, "id" | "userId">) {
 
   if (!session) throw new Error("You must be logged in to create room");
 
-  await createRoom(roomData, session.user.id);
+  const room = await createRoom(roomData, session.user.id);
 
   revalidatePath("/"); // re-fetching data in home page as new data is inserted.(can also do router.refresh on client)
+
+  return room;
 }
