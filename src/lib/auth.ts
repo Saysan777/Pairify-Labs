@@ -55,10 +55,6 @@ export const authConfig = {
 
       return session;
     },
-
-    async redirect({ url, baseUrl }) {
-      return "/browse";
-    },
   },
 } satisfies AuthOptions;
 
