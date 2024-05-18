@@ -6,7 +6,7 @@ import { RoomCard } from "@/app/browse/room-card";
 import { unstable_noStore } from "next/cache";
 import Image from "next/image";
 
-export default async function Home({ searchParams }: { searchParams: string }) {
+export default async function Home({ searchParams }: { searchParams: { search: string } }) {
   const query = searchParams.search;
 
   unstable_noStore();
