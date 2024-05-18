@@ -13,17 +13,19 @@ export default async function Home({ searchParams }: { searchParams: string }) {
   const rooms = await getRooms(query);
 
   return (
-    <main className="min-h-screen p-16">
-      <div className="flex justify-between w-full mb-8">
-        <h1 className="text-4xl">Join Dev Rooms</h1>
-        <Button>
-          <Link href="/create-room">Create room </Link>
+    <main className="min-h-screen p-1 md:p-6">
+      <div className="flex justify-between items-center sm:flex sm:flex-col mt-3 md:flex-row md:space-y-0 w-full mb-8">
+        <h1 className="text-xl md:text-4xl font-bold">Join Dev Rooms</h1>
+        <Button className="w-[90px] md:w-[100px]">
+          <Link href="/create-room" className="text-xs">
+            Create room{" "}
+          </Link>
         </Button>
       </div>
 
       <SearchBar />
 
-      <div className="grid grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 min-w-[300px]">
         {rooms.map((room) => {
           return <RoomCard key={room.id} room={room} />;
         })}
