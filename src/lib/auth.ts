@@ -57,21 +57,7 @@ export const authConfig = {
     },
 
     async redirect({ url, baseUrl }) {
-      // Allows relative callback URLs
-      if (url.startsWith("/")) {
-        console.log("baseurl1----------------", baseUrl);
-        console.log("url1-----------", url);
-        return `${baseUrl}${url}`;
-      }
-      // Allows callback URLs on the same origin
-      if (new URL(url).origin === baseUrl) {
-        console.log("baseurl2----------------", baseUrl);
-        console.log("url2----------------", url);
-        return url;
-      }
-
-      console.log("baseurl3----------------", baseUrl);
-      return baseUrl;
+      return "/browse";
     },
   },
 } satisfies AuthOptions;
