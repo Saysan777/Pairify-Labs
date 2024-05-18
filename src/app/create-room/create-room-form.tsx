@@ -18,6 +18,7 @@ import { Input } from "@/components/ui/input";
 import { createRoomAction } from "./action";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
+import { useState } from "react";
 
 const formSchema = z.object({
   name: z.string().min(1).max(50),
@@ -29,6 +30,7 @@ const formSchema = z.object({
 const CreateRoomForm = () => {
   const router = useRouter();
   const { toast } = useToast();
+  const [submitted, setSubmitted] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -41,6 +43,7 @@ const CreateRoomForm = () => {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    setSubmitted(true);
     const room = await createRoomAction(values);
 
     toast({
@@ -133,7 +136,13 @@ const CreateRoomForm = () => {
             )}
           />
 
-          <Button type="submit">Submit</Button>
+          {submitted ? (
+            <Button type="submit" disabled>
+              Submit
+            </Button>
+          ) : (
+            <Button type="submit">Submit</Button>
+          )}
         </form>
       </Form>
     </div>

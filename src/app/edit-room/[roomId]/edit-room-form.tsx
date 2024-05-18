@@ -19,6 +19,7 @@ import { Input } from "@/components/ui/input";
 import { editRoomAction } from "./actions";
 import { Room } from "@/db/schema";
 import { useToast } from "@/components/ui/use-toast";
+import { useState } from "react";
 
 const formSchema = z.object({
   name: z.string().min(1).max(50),
@@ -29,6 +30,8 @@ const formSchema = z.object({
 
 export const EditRoomForm = ({ room }: { room: Room }) => {
   const { toast } = useToast();
+  const [submitted, setSubmitted] = useState(false);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -40,6 +43,7 @@ export const EditRoomForm = ({ room }: { room: Room }) => {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    setSubmitted(true);
     const roomData = { ...values, id: room.id as string };
 
     await editRoomAction(roomData);
@@ -131,7 +135,13 @@ export const EditRoomForm = ({ room }: { room: Room }) => {
             )}
           />
 
-          <Button type="submit">Submit</Button>
+          {submitted ? (
+            <Button type="submit" disabled>
+              Submit
+            </Button>
+          ) : (
+            <Button type="submit">Submit</Button>
+          )}
         </form>
       </Form>
     </div>
