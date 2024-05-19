@@ -1,5 +1,3 @@
-import postgres from "postgres";
-import { drizzle } from "drizzle-orm/postgres-js";
 import type { AdapterAccount } from "next-auth/adapters";
 import {
   timestamp,
@@ -10,12 +8,6 @@ import {
   uuid,
 } from "drizzle-orm/pg-core";
 import { sql } from "drizzle-orm";
-
-const connectionString = "postgres://postgres:postgres@localhost:5432/drizzle";
-
-//* Need cleanup?
-// const pool = postgres(connectionString, { max: 1 });
-// export const db = drizzle(pool);
 
 // creating a table named users with its fields
 export const users = pgTable("user", {

@@ -10,8 +10,16 @@ declare global {
 
 let db: PostgresJsDatabase<typeof schema>;
 
+const connectionOptions = {
+  ssl: {
+    rejectUnauthorized: false,
+  },
+};
+
 if (process.env.NODE_ENV === "production") {
-  db = drizzle(postgres(process.env.DATABASE_URL!), { schema });
+  db = drizzle(postgres(process.env.DATABASE_URL!, connectionOptions), {
+    schema,
+  });
 } else {
   if (!global.db) {
     global.db = drizzle(postgres(process.env.DATABASE_URL!), { schema });
