@@ -146,12 +146,7 @@ function MobileDropDown() {
                   <Link
                     href={"/browse"}
                     className="flex gap-2 text-sm items-center"
-                    onClick={() =>
-                      signIn("google", {
-                        redirect: true,
-                        callbackUrl: "/browse",
-                      })
-                    }
+                    onClick={() => signIn("google")}
                   >
                     <LogIn /> Sign In
                   </Link>
@@ -263,18 +258,13 @@ const Header = () => {
           </nav>
           {isLoggedIn && <AccountDropDown />}
           {!isLoggedIn && (
-            <Button
-              variant="link"
+            <Link
+              href={"/browse"}
               className="gap-2"
-              onClick={() =>
-                signIn("google", {
-                  redirect: true,
-                  callbackUrl: "/browse",
-                })
-              }
+              onClick={() => signIn("google")}
             >
               <LogIn /> Sign In
-            </Button>
+            </Link>
           )}
           <ModeToggle />
         </div>
