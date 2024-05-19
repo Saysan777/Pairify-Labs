@@ -17,14 +17,14 @@ export default async function RoomPage(props: { params: { roomid: string } }) {
   }
 
   return (
-    <div className="grid grid-cols-4 min-h-screen">
-      <div className="col-span-3 p-4 pr-2">
+    <div className="flex flex-col gap-6 md:grid md:grid-cols-4 md:min-h-screen">
+      <div className="col-span-4 mt-6 md:col-span-3 md:p-4 md:pr-2 md:mt-0">
         <div className="drop-shadow-lg bg-gray-100 dark:bg-gray-900 p-4 rounded-lg bg-card text-card-foreground shadow-sm">
           <PairifyVideoPlayer room={room} />
         </div>
       </div>
 
-      <div className="col-span-1 p-4">
+      <div className="col-span-4 md:col-span-1 md:p-4">
         <div className="drop-shadow-lg bg-gray-100 dark:bg-gray-900 rounded p-4 bg-card text-card-foreground shadow-sm flex flex-col gap-4">
           <h1 className="text-base font-bold">{room?.name}</h1>
           <p className="text-base text-gray-600 border border-gray-400 rounded-xl p-4">
