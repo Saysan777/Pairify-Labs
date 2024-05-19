@@ -144,8 +144,14 @@ function MobileDropDown() {
               {!isLoggedIn && (
                 <DropdownMenuItem>
                   <Button
+                    variant={"link"}
                     className="flex gap-2 text-sm items-center"
-                    onClick={() => signIn("google")}
+                    onClick={() =>
+                      signIn("google", {
+                        redirect: true,
+                        callbackUrl: "/browse",
+                      })
+                    }
                   >
                     <LogIn /> Sign In
                   </Button>
@@ -257,7 +263,15 @@ const Header = () => {
           </nav>
           {isLoggedIn && <AccountDropDown />}
           {!isLoggedIn && (
-            <Button className="flex gap-2" onClick={() => signIn("google")}>
+            <Button
+              className="flex gap-2"
+              onClick={() =>
+                signIn("google", {
+                  redirect: true,
+                  callbackUrl: "/browse",
+                })
+              }
+            >
               <LogIn /> Sign In
             </Button>
           )}

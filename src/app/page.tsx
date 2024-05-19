@@ -51,7 +51,7 @@ export default function LandingPage() {
                 <h1 className="lg:leading-tighter text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl xl:text-[3.4rem] 2xl:text-[3.75rem]">
                   Pairify - Elevate Your Coding Collaboration
                 </h1>
-                <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
+                <p className="mx-auto max-w-[700px] text-gray-500 text-xs dark:text-gray-400 md:text-sm">
                   Pairify is a powerful pair programming tool that enables
                   seamless collaboration, real-time code sharing, and video
                   conferencing for developers.
@@ -88,7 +88,7 @@ export default function LandingPage() {
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
                   Collaborate with Ease
                 </h2>
-                <p className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
+                <p className="max-w-[900px] text-gray-500 text-xs md:text-sm dark:text-gray-400">
                   Pairify offers a suite of powerful features to streamline your
                   pair programming experience.
                 </p>
@@ -165,7 +165,7 @@ export default function LandingPage() {
               <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
                 Streamline Your Pair Programming Workflow
               </h2>
-              <p className="max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
+              <p className="max-w-[600px] text-gray-500 text-xs md:text-sm dark:text-gray-400">
                 Pairify is designed to help you and your team collaborate
                 seamlessly, so you can focus on writing great code together.
               </p>
