@@ -25,6 +25,16 @@
 
 <br>
 
+## Tech Stack
+
+- **Frontend** : Typescript, React.js with NextJS.
+- **Backend** : NextJS.
+- **Realtime Communication** : getStream.io.
+- **Database** : DrizzleORM with PostgreSQL database.
+- **Authentication**: Next-Auth.
+- **Styling** : Shadcn Design, tailwind Css, lucide-react.
+- **Deployment** : Client, server and Database hosted on vercel.
+
 ## Local Development
 
 To get started with this project, run
@@ -36,16 +46,6 @@ To get started with this project, run
 and copy the .env.sampler variables into a separate .env file, fill them out & and that's all you need to get started!
 
 <br>
-
-## Tech Stack
-
-- **Frontend** : Typescript, React.js with NextJS.
-- **Backend** : NextJS.
-- **Realtime Communication** : getStream.io.
-- **Database** : DrizzleORM with PostgreSQL database.
-- **Authentication**: Next-Auth.
-- **Styling** : Shadcn Design, tailwind Css, lucide-react.
-- **Deployment** : Client, server and Database hosted on vercel.
 
 ## License
 
