@@ -48,20 +48,20 @@
 
 ## Local Development
 
-To get started with this project, run
+1. To get started with this project, run
 
 ```bash
   git clone https://github.com/Saysan777/Pairify-Labs.git
 ```
 
-- Go to `Pairify-Labs` directory.
+2. Go to `Pairify-Labs` directory.
 
 ```bash
  cd pairify-labs
 ```
 
-- Create a new .env file and copy .env.sample into the .env file.
-- Fill the .env variables & then run the follwing command.
+3. Create a new .env file and copy .env.sample into the .env file.
+4. Fill the .env variables & then run the follwing command.
 
 ```bash
     yarn dev
