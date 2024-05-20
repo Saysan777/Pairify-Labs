@@ -11,7 +11,7 @@ export default async function PersonalRoomsPage() {
 
   return (
     <main className="min-h-screen p-1 md:p-10">
-      <div className="flex justify-between items-center sm:flex sm:flex-col mt-3 md:flex-row md:space-y-0 w-full mb-8">
+      <div className="flex justify-between items-center mt-3 w-full mb-8">
         <h1 className="text-xl md:text-4xl font-bold">Join Dev Rooms</h1>
         <Button className="w-[90px] md:w-[100px]">
           <Link href="/create-room" className="text-xs">

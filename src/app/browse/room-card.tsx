@@ -27,11 +27,12 @@ export function RoomCard({ room }: { room: Room }) {
         {room.githubRepo && (
           <Link
             href={room.githubRepo}
-            className="flex items-center gap-2"
+            className="flex items-center gap-2 underline"
             target="_blank"
             rel="noopner noreferrer"
           >
-            <GithubIcon /> Github Project
+            <GithubIcon />{" "}
+            <span className="hover:scale-105 font-bold"> Github Project</span>
           </Link>
         )}
       </CardContent>

@@ -20,6 +20,7 @@ import { editRoomAction } from "./actions";
 import { Room } from "@/db/schema";
 import { useToast } from "@/components/ui/use-toast";
 import { useState } from "react";
+import { LoaderCircle } from "lucide-react";
 
 const formSchema = z.object({
   name: z.string().min(1).max(50),
@@ -137,7 +138,7 @@ export const EditRoomForm = ({ room }: { room: Room }) => {
 
           {submitted ? (
             <Button type="submit" disabled>
-              Submit
+              <LoaderCircle className="animate-spin" /> Submit
             </Button>
           ) : (
             <Button type="submit">Submit</Button>

@@ -6,7 +6,11 @@ import { RoomCard } from "@/app/browse/room-card";
 import { unstable_noStore } from "next/cache";
 import Image from "next/image";
 
-export default async function Home({ searchParams }: { searchParams: { search: string } }) {
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: { search: string };
+}) {
   const query = searchParams.search;
 
   unstable_noStore();
@@ -14,7 +18,7 @@ export default async function Home({ searchParams }: { searchParams: { search: s
 
   return (
     <main className="min-h-screen p-1 md:p-6">
-      <div className="flex justify-between items-center sm:flex sm:flex-col mt-3 md:flex-row md:space-y-0 w-full mb-8">
+      <div className="flex justify-between items-center mt-3 w-full mb-8">
         <h1 className="text-xl md:text-4xl font-bold">Join Dev Rooms</h1>
         <Button className="w-[90px] md:w-[100px]">
           <Link href="/create-room" className="text-xs">
@@ -32,7 +36,7 @@ export default async function Home({ searchParams }: { searchParams: { search: s
       </div>
 
       {rooms.length === 0 && (
-        <div className="flex flex-col gap-4 justify-center items-center mt-32">
+        <div className="flex flex-col sm:flex gap-4 justify-center items-center mt-32">
           <Image
             src="/empty-rooms.svg"
             alt="empty rooms"

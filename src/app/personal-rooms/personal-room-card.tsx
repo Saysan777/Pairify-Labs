@@ -31,13 +31,16 @@ import { deleteRoomAction } from "./action";
 export function PersonalRoomCard({ room }: { room: Room }) {
   return (
     <Card>
-      <CardHeader className="relative">
-        <Button className="absolute top-1 right-1 w-10 h-8" size="icon">
+      <CardHeader className="h-[40px] p-0 px-2 py-1 flex-row justify-end">
+        <Button className="" size="icon">
           <Link href={`/edit-room/${room.id}`}>
             <PencilIcon className="w-4 h-4" />
           </Link>
         </Button>
-        <CardTitle>{room.name}</CardTitle>
+      </CardHeader>
+
+      <CardHeader className="py-0">
+        <CardTitle className="pt-3">{room.name}</CardTitle>
         <CardDescription>{room.description}</CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-5">
@@ -46,11 +49,12 @@ export function PersonalRoomCard({ room }: { room: Room }) {
         {room.githubRepo && (
           <Link
             href={room.githubRepo}
-            className="flex items-center gap-2"
+            className="flex items-center gap-2 underline"
             target="_blank"
             rel="noopner noreferrer"
           >
-            <GithubIcon /> Github Project
+            <GithubIcon />{" "}
+            <span className="hover:scale-105 font-bold"> Github Project</span>
           </Link>
         )}
       </CardContent>

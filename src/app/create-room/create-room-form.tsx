@@ -19,6 +19,7 @@ import { createRoomAction } from "./action";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
 import { useState } from "react";
+import { LoaderCircle } from "lucide-react";
 
 const formSchema = z.object({
   name: z.string().min(1).max(50),
@@ -138,7 +139,7 @@ const CreateRoomForm = () => {
 
           {submitted ? (
             <Button type="submit" disabled>
-              Submit
+              <LoaderCircle className="animate-spin" /> Submit
             </Button>
           ) : (
             <Button type="submit">Submit</Button>

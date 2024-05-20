@@ -27,7 +27,7 @@ export default async function RoomPage(props: { params: { roomid: string } }) {
       <div className="col-span-4 md:col-span-1 md:p-4">
         <div className="drop-shadow-lg bg-gray-100 dark:bg-gray-900 rounded p-4 bg-card text-card-foreground shadow-sm flex flex-col gap-4">
           <h1 className="text-base font-bold">{room?.name}</h1>
-          <p className="text-base text-gray-600 border border-gray-400 rounded-xl p-4">
+          <p className="text-base text-gray-600 border border-gray-400 rounded-lg p-2">
             {room?.description}
           </p>
 
@@ -36,11 +36,12 @@ export default async function RoomPage(props: { params: { roomid: string } }) {
           {room.githubRepo && (
             <Link
               href={room.githubRepo}
-              className="flex items-center gap-2"
+              className="flex items-center gap-2 text-sm underline"
               target="_blank"
               rel="noopner noreferrer"
             >
-              <GithubIcon /> Github Project
+              <GithubIcon />{" "}
+              <span className="hover:scale-105 font-bold"> Github Project</span>
             </Link>
           )}
         </div>

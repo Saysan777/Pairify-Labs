@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { SearchIcon } from "lucide-react";
+import { SearchIcon, X } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -47,7 +47,7 @@ export function SearchBar() {
     <Form {...search}>
       <form
         onSubmit={search.handleSubmit(onSubmit)}
-        className="flex items-center gap-4 md:flex-row md:items-center md:space-y-0 md:space-x-4 mb-8"
+        className="flex flex-col items-start justify-between space-y-3 md:flex-row md:justify-start md:items-center md:space-y-0 md:space-x-4 mb-8"
       >
         <FormField
           control={search.control}
@@ -57,7 +57,7 @@ export function SearchBar() {
               <FormControl>
                 <Input
                   {...field}
-                  className="w-[200px] md:w-[440px]"
+                  className="w-[340px] md:w-[440px]"
                   placeholder="Filter rooms by keywords, such as typescript, nextjs"
                 />
               </FormControl>
@@ -65,23 +65,25 @@ export function SearchBar() {
             </FormItem>
           )}
         />
-
-        <Button type="submit" className="w-[90px] md:w-[100px]">
-          <SearchIcon className="mr-2" />
-          <p className="text-xs">Search</p>
-        </Button>
-
-        {query.get("search") && (
-          <Button
-            variant="link"
-            onClick={() => {
-              search.setValue("search", "");
-              router.push("/browse");
-            }}
-          >
-            Clear
+        <div className="flex gap-2">
+          <Button type="submit" className="w-[90px] md:w-[100px]">
+            <SearchIcon className="mr-2" />
+            <p className="text-xs">Search</p>
           </Button>
-        )}
+
+          {query.get("search") && (
+            <Button
+              variant="link"
+              onClick={() => {
+                search.setValue("search", "");
+                router.push("/browse");
+              }}
+              className="w-[50px] md:w-[50px] border"
+            >
+              <X className="w-[20px]" />
+            </Button>
+          )}
+        </div>
       </form>
     </Form>
   );

@@ -1,5 +1,4 @@
 "use client";
-
 import { ModeToggle } from "@/components/mode-toggle";
 import { signIn, signOut, useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
@@ -24,9 +23,9 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { deleteAccountAction } from "./actions";
+import { useRouter } from "next/navigation";
 
 function AccountDropDown() {
   const session = useSession();
@@ -94,6 +93,7 @@ function AccountDropDown() {
 function MobileDropDown() {
   const session = useSession();
   const isLoggedIn = session?.data;
+  const router = useRouter();
   const [deleteAccount, setDeleteAccount] = useState(false);
 
   return (
@@ -142,63 +142,62 @@ function MobileDropDown() {
 
             <DropdownMenuContent className="border-0">
               {!isLoggedIn && (
-                <DropdownMenuItem>
-                  <Button
-                    variant={"link"}
-                    className="flex gap-2 text-sm items-center"
-                    onClick={() =>
-                      signIn("google", {
-                        redirect: true,
-                        callbackUrl: "/browse",
-                      })
-                    }
-                  >
-                    <LogIn /> Sign In
-                  </Button>
+                <DropdownMenuItem
+                  className="flex gap-2 text-sm items-center hover:underline cursor-pointer"
+                  onClick={() =>
+                    signIn("google", {
+                      redirect: true,
+                      callbackUrl: "/browse",
+                    })
+                  }
+                >
+                  <LogIn /> Sign In
                 </DropdownMenuItem>
               )}
 
               {isLoggedIn && (
-                <DropdownMenuItem>
-                  <Link href={"/browse"} className="hover:underline">
-                    Browse
-                  </Link>
-                </DropdownMenuItem>
-              )}
-
-              {isLoggedIn && <DropdownMenuSeparator />}
-
-              {isLoggedIn && (
-                <DropdownMenuItem>
-                  <Link href={"/personal-rooms"} className="hover:underline">
-                    My rooms
-                  </Link>
+                <DropdownMenuItem
+                  className="hover:underline cursor-pointer"
+                  onClick={() => router.push("/browse")}
+                >
+                  Browse
                 </DropdownMenuItem>
               )}
 
               {isLoggedIn && <DropdownMenuSeparator />}
 
               {isLoggedIn && (
-                <DropdownMenuItem>
-                  <div className="" onClick={() => setDeleteAccount(true)}>
-                    Delete account
-                  </div>
+                <DropdownMenuItem
+                  className="hover:underline cursor-pointer"
+                  onClick={() => router.push("/personal-rooms")}
+                >
+                  My rooms
                 </DropdownMenuItem>
               )}
 
               {isLoggedIn && <DropdownMenuSeparator />}
 
               {isLoggedIn && (
-                <DropdownMenuItem>
-                  <div
-                    onClick={() =>
-                      signOut({
-                        callbackUrl: "/",
-                      })
-                    }
-                  >
-                    Sign out
-                  </div>
+                <DropdownMenuItem
+                  className="hover:underline cursor-pointer"
+                  onClick={() => setDeleteAccount(true)}
+                >
+                  Delete account
+                </DropdownMenuItem>
+              )}
+
+              {isLoggedIn && <DropdownMenuSeparator />}
+
+              {isLoggedIn && (
+                <DropdownMenuItem
+                  className="hover:underline cursor-pointer"
+                  onClick={() =>
+                    signOut({
+                      callbackUrl: "/",
+                    })
+                  }
+                >
+                  Sign out
                   <DropdownMenuSeparator />
                 </DropdownMenuItem>
               )}
