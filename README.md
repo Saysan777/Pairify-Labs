@@ -1,14 +1,26 @@
 # Pairify Labs
 
-- Pairify is a powerful pair programming platform that enables seamless collaboration, real-time code sharing, and video conferencing for developers. It provides features such as screen sharing, video calling, room creation, and joining rooms created by other developers to enhance your coding experience.
-
-- In addition to that, Pairify Labs provides secure authentication facilitated by `next-auth`, and ensures a secure and engaging platform for developers.
-  <br>
-  Pairify Labs is built with the Next.js 14(App router), getstreamIo, TypeScript, Postgres, DrizzleORM and shadcn for design.
+- `Pairify-Labs` is a powerful pair programming platform that enables seamless collaboration, real-time code sharing, and video conferencing for developers. It provides features such as screen sharing, video calling, create or join rooms created by other developers to enhance your coding experience.
 
 <!-- ![Project Image](https://github.com/Saysan777/Digital-Arc/blob/main/public/DigitalArc.jpg) -->
 
 <br>
+
+<p align="center">
+<a href="https://pairify-labs.vercel.app">
+    Pairify-Labs
+</a>
+
+<h3 align="center">Learn, Collab & Grow Together.</h3>
+</p>
+
+<p align="center">
+<a href="https://pairify-labs.vercel.app">View Demo</a>
+·
+<a href="https://github.com/Saysan777/Pairify-Labs/issues">Report Bug</a>
+·
+<a href="https://github.com/Saysan777/Pairify-Labs/issues">Request Feature</a>
+</p>
 
 # Features
 
@@ -43,7 +55,24 @@ To get started with this project, run
   git clone https://github.com/Saysan777/Pairify-Labs.git
 ```
 
-and copy the .env.sampler variables into a separate .env file, fill them out & and that's all you need to get started!
+- Go to `Pairify-Labs` directory.
+
+```bash
+ cd pairify-labs
+```
+
+- Create a new .env file and copy .env.sample into the .env file.
+- Fill the .env variables & then run the follwing command.
+
+```bash
+    yarn dev
+```
+
+<br>
+
+## Contributing
+
+Contributions, issues and feature requests are welcomed. After cloning & setting up project locally, you can just submit a PR to this repo and it will be deployed once it's accepted.
 
 <br>
 
