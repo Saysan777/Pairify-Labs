@@ -25,7 +25,20 @@ function Footer() {
         <Link className="text-xs hover:underline underline-offset-4" href="#">
           Privacy Policy
         </Link>
-        <Link className="text-xs hover:underline underline-offset-4" href="#">
+
+        <Link
+          className="text-xs hover:underline underline-offset-4"
+          href="https://www.linkedin.com/in/alok-aryal-589a40216/"
+          target="_blank"
+        >
+          LinkedIn
+        </Link>
+
+        <Link
+          className="text-xs hover:underline underline-offset-4"
+          href="https://x.com/pragmatic_Alok"
+          target="_blank"
+        >
           Twitter
         </Link>
         <Link
