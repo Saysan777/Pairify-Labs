@@ -27,12 +27,11 @@
 - 🛠️ Comprehensive & powerful platform for pair programming crafted with Next.js 14.
 - 📞 Video calling feature for real-time communication.
 - 🎥 Screen sharing capabilities to enhance collaborative coding sessions.
-- 🏠 Room creation and deletion functionalities to manage collaborative spaces.
-- 📱 Responsive design ensuring seamless use of Pairfiy Labs on both mobile and web, providing an optimal user experience across all devices.
+- 🏠 Room management features, including the ability to create, join, and delete rooms for seamless collaboration.
+- 📱 Responsive design ensuring seamless use of Pairfiy Labs on both mobile and web devices, providing an optimal user experience across all devices.
 - 🔑 Secure authentication mechanism utilizing next-auth, drizzleORM and postgresDB.
 - ⌨️ Entire codebase written in TypeScript, ensuring type safety and scalability.
 - 🌟 Aesthetically pleasing, modern UI design crafted with shadcn-ui, ensuring intuitive navigation.
-- 💻 Elegant and robust designed for optimal user experience.
 - 🎁 Additional features and enhancements to further elevate the platform experience.
 
 <br>
@@ -44,8 +43,8 @@
 - **Realtime Communication** : getStream.io.
 - **Database** : DrizzleORM with PostgreSQL database.
 - **Authentication**: Next-Auth.
-- **Styling** : Shadcn Design, tailwind Css, lucide-react.
-- **Deployment** : Client, server and Database hosted on vercel.
+- **Styling** : Shadcn Design, tailwind CSS, lucide-react(icons).
+- **Deployment** : Client, Server and Database hosted on vercel.
 
 ## Local Development
 
