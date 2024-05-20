@@ -7,7 +7,7 @@
 <br>
 
 <p align="center">
-<a href="https://pairify-labs.vercel.app">
+<a href="https://pairify-labs.vercel.app" target="_blank">
     Pairify-Labs
 </a>
 
@@ -15,11 +15,11 @@
 </p>
 
 <p align="center">
-<a href="https://pairify-labs.vercel.app">View Demo</a>
+<a href="https://pairify-labs.vercel.app" target="_blank">View Demo</a>
 ·
-<a href="https://github.com/Saysan777/Pairify-Labs/issues">Report Bug</a>
+<a href="https://github.com/Saysan777/Pairify-Labs/issues" target="_blank">Report Bug</a>
 ·
-<a href="https://github.com/Saysan777/Pairify-Labs/issues">Request Feature</a>
+<a href="https://github.com/Saysan777/Pairify-Labs/issues" target="_blank">Request Feature</a>
 </p>
 
 # Features
