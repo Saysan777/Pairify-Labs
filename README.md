@@ -50,4 +50,4 @@ and copy the .env.sampler variables into a separate .env file, fill them out & a
 ## License
 
 Copyright © 2024 [Alok Aryal](https://host-next.vercel.app/).
-This project is [MIT](https://choosealicense.com/licenses/mit/ licensed.)
+This project is [MIT](https://choosealicense.com/licenses/mit/) licensed.
